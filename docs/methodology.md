@@ -104,6 +104,10 @@ The finest grid spacing of 0.00625 µm is therefore adopted for the subsequent s
 
 The numerical results are stored in `mesh_convergence.csv` and can be reproduced using `simulations/mesh_convergence.py`.
 
+The corresponding mesh convergence plot is shown below.
+
+![Mesh convergence analysis](../figures/mesh_convergence.png)
+
 ## 5. Computational Domain Size Convergence
 
 The influence of the computational window size is evaluated by comparing the calculated effective indices for different domain dimensions.
