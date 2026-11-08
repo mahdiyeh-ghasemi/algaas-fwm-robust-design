@@ -4,36 +4,66 @@
 
 This project investigates the numerical modeling and fabrication-tolerant design of degenerate four-wave mixing (FWM) in AlGaAs-on-insulator (AlGaAsOI) integrated optical waveguides.
 
-The study focuses on understanding how geometrical variations and fabrication-induced dimensional uncertainties influence waveguide dispersion, phase-matching conditions, and nonlinear wavelength conversion performance.
+The main objective is to study the relationship between waveguide geometry, modal properties, dispersion engineering, and the potential robustness of nonlinear wavelength conversion against fabrication variations.
 
-## Research Objective
+## Research Objectives
 
-The primary objective is to investigate the relationship between waveguide geometry, dispersion engineering, and the robustness of four-wave mixing under realistic fabrication variations.
+- Analyze guided modes and their effective refractive indices.
+- Investigate the influence of waveguide geometry on modal properties.
+- Calculate waveguide dispersion using wavelength-dependent modal data.
+- Establish a numerical framework for future FWM phase-matching and fabrication-tolerance studies.
 
-## Research Questions
+## Physical Platform and Initial Model
 
-1. How do waveguide width and thickness affect modal dispersion and phase matching?
-2. How sensitive is FWM conversion efficiency to geometrical fabrication variations?
-3. How do nonlinear absorption mechanisms influence wavelength conversion performance?
-4. Can geometries with improved fabrication tolerance be identified through numerical optimization?
+- Material platform: AlGaAs core on a silica substrate.
+- Upper and lateral cladding: Air.
+- Nonlinear process of interest: Degenerate four-wave mixing.
+- Initial geometry: Rectangular waveguide.
+- Numerical approach: Finite-difference eigenmode analysis.
 
-## Physical Platform
+The current geometry and material configuration represent a simplified numerical model and should not be interpreted as a fully validated fabrication stack.
 
-- Material platform: AlGaAs-on-Insulator (AlGaAsOI)
-- Nonlinear process: Degenerate Four-Wave Mixing
-- Optical mode: Fundamental TE mode
-- Modeling approach: Numerical simulation and optimization
+## Current Implementation
 
-## Methodology
+The repository currently includes:
 
-The project will be developed through the following stages:
+1. Waveguide geometry and wavelength-dependent material modeling.
+2. Numerical calculation of guided modes and effective refractive indices.
+3. Mesh and computational-domain convergence checks.
+4. Modal field and polarization-component analysis.
+5. Wavelength-dependent effective-index data generation.
+6. Group-velocity dispersion calculation using polynomial fitting.
+7. Visualization and comparison of modal and dispersion results.
 
-1. Literature review and physical parameter extraction
-2. Waveguide geometry definition and modal analysis
-3. Dispersion calculation and phase-matching analysis
-4. Nonlinear propagation and FWM modeling
-5. Fabrication-tolerance and sensitivity analysis
-6. Numerical optimization and performance evaluation
+## Selected Results
+
+### Modal Analysis
+
+Four guided modes have been calculated for the initial waveguide geometry. Their effective indices and field distributions are available in the `figures/` directory.
+
+![Comparison of guided modes](figures/all_modes_comparison.png)
+
+### Dispersion Analysis
+
+Wavelength-dependent effective-index data have been generated over the 1500–1600 nm range. The corresponding dispersion analysis is available below.
+
+![Waveguide dispersion analysis](figures/dispersion_analysis.png)
+
+The current dispersion results are numerical outputs of the simplified model and have not yet been experimentally validated.
+
+## Repository Structure
+
+```text
+├── docs/
+│   ├── literature_review.md
+│   ├── methodology.md
+│   └── physical_model.md
+├── figures/
+├── simulations/
+├── src/
+├── dispersion_data.csv
+└── README.md
+```
 
 ## Computational Tools
 
@@ -41,22 +71,26 @@ The project will be developed through the following stages:
 - NumPy
 - SciPy
 - Matplotlib
-- Electromagnetic mode-solving tools
+- Pandas
+- Electromagnetic eigenmode solver
 
-## Research Scope
+## Ongoing and Planned Work
 
-This is an independent computational research project. The numerical models, assumptions, material parameters, and simulation results will be documented to support reproducibility and scientific evaluation.
+- Verification of modal identity across the wavelength range.
+- Further validation of material and waveguide model assumptions.
+- Four-wave mixing phase-matching analysis.
+- Nonlinear propagation and conversion-efficiency modeling.
+- Fabrication sensitivity and tolerance analysis.
+- Numerical optimization of waveguide geometry.
 
-The project does not claim experimental validation.
+## Research Scope and Limitations
 
-## Project Status
+This is an independent computational research project. Model assumptions, numerical methods, and simulation results are documented to support reproducibility and critical evaluation.
 
-**Status:** Research design and literature review.
-
-Numerical implementation and validation are forthcoming.
+The current results are preliminary numerical findings. Experimental validation and comparison with a realistic fabrication platform remain future work.
 
 ## Author
 
-Mahdiyeh Ghasemi
+**Mahdiyeh Ghasemi**
 
 Research interests: Experimental Photonics, Nonlinear Integrated Photonics, Quantum Systems, and Computational Physics.
