@@ -203,7 +203,32 @@ These results indicate strong continuity of the calculated electric-field profil
 
 This overlap analysis is a numerical mode-tracking check. It does not independently establish the physical accuracy of the waveguide model or replace validation against experimental or reference data.
 
-## 8. Phase Matching and Fabrication Tolerance
+## 8. Geometrical Sensitivity Analysis
+
+The sensitivity of the calculated effective indices to variations in the waveguide core width and thickness is investigated using independent parameter sweeps.
+
+The nominal geometry is defined by:
+
+- Core width: 0.75 µm
+- Core thickness: 0.35 µm
+
+Each geometrical parameter is varied independently while the other geometrical parameter, material properties, wavelength, and numerical settings are kept unchanged.
+
+For the width sweep, the core width ranges from 0.73 µm to 0.77 µm. For the thickness sweep, the core thickness ranges from 0.33 µm to 0.37 µm. Five values are evaluated for each parameter.
+
+The calculated effective indices of the four modes are stored in `geometrical_tolerance.csv`. The analysis can be reproduced using `simulations/geometrical_tolerance.py`.
+
+The resulting sensitivity curves are shown below.
+
+![Geometrical tolerance analysis](../figures/geometrical_tolerance.png)
+
+The results show that the effective indices increase with both core width and core thickness over the investigated ranges. The magnitude of the response differs between modes and geometrical parameters.
+
+For the fundamental mode, the effective index changes from approximately 2.7807 to 2.7991 over the investigated width range, and from 2.7602 to 2.8171 over the investigated thickness range.
+
+These results represent numerical geometrical sensitivity under the current simplified waveguide model. Since the spatial grid is fixed, changes in the discretized core boundaries may also influence the calculated effective indices. Further mesh-refinement and mode-continuity checks are therefore required before interpreting these results as realistic fabrication tolerances.
+
+## 9. Phase Matching and Fabrication-Tolerant Optimization
 
 The next stage of the project will investigate four-wave-mixing phase-matching conditions using the calculated modal propagation constants.
 
