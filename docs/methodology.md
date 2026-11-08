@@ -228,7 +228,48 @@ For the fundamental mode, the effective index changes from approximately 2.7807 
 
 These results represent numerical geometrical sensitivity under the current simplified waveguide model. Since the spatial grid is fixed, changes in the discretized core boundaries may also influence the calculated effective indices. Further mesh-refinement and mode-continuity checks are therefore required before interpreting these results as realistic fabrication tolerances.
 
-## 9. Phase Matching and Fabrication-Tolerant Optimization
+## 9. Dimensionless Geometrical Sensitivity Coefficients
+
+To quantify the relative response of the effective refractive index to geometrical variations, dimensionless sensitivity coefficients are calculated for the core width and thickness.
+
+The sensitivity coefficient for a geometrical parameter \(p\) is defined as:
+
+\[
+S_p = \frac{p}{n_{\mathrm{eff}}}
+\frac{\partial n_{\mathrm{eff}}}{\partial p}
+\]
+
+The derivative is approximated numerically using a central finite difference around the nominal geometry:
+
+\[
+\frac{\partial n_{\mathrm{eff}}}{\partial p}
+\approx
+\frac{n_{\mathrm{eff}}(p+0.01)-n_{\mathrm{eff}}(p-0.01)}
+{0.02}
+\]
+
+The nominal core width and thickness are 0.75 µm and 0.35 µm, respectively. Each parameter is varied independently while the other geometrical parameter is held fixed.
+
+The calculated dimensionless sensitivity coefficients are summarized below.
+
+| Parameter | Mode 1 | Mode 2 | Mode 3 | Mode 4 |
+|---|---:|---:|---:|---:|
+| Width | 0.0821 | 0.0637 | 0.5060 | 0.2881 |
+| Thickness | 0.1187 | 0.3677 | 0.1915 | 0.5120 |
+
+The results indicate that the relative sensitivity depends on both the geometrical parameter and the mode. Mode 3 exhibits the highest sensitivity to core width, whereas Mode 4 exhibits the highest sensitivity to core thickness among the calculated modes.
+
+A dimensionless coefficient of 0.506 indicates that, locally around the nominal geometry, a 1% increase in core width produces approximately a 0.506% increase in the effective refractive index of Mode 3.
+
+The calculated coefficients are local numerical sensitivity indicators. They do not directly represent fabrication tolerances or phase-matching sensitivity. Their accuracy is also subject to the discretization and convergence limitations discussed in Section 8.
+
+The numerical results are stored in `sensitivity_coefficients.csv` and can be reproduced using `simulations/sensitivity_coefficients.py`. The corresponding comparison plot is shown below.
+
+![Dimensionless geometrical sensitivity coefficients](../figures/sensitivity_coefficients.png)
+
+**Figure 4.** Dimensionless sensitivity coefficients of the effective refractive index with respect to core width and thickness for the four calculated modes.
+
+## 10. Phase Matching and Fabrication-Tolerant Optimization
 
 The next stage of the project will investigate four-wave-mixing phase-matching conditions using the calculated modal propagation constants.
 
