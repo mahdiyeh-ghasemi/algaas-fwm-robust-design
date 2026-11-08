@@ -41,9 +41,7 @@ $$
 The propagation constant is then obtained from:
 
 $$
-\beta(\omega,W,H)
-=
-\frac{\omega}{c}n_{\mathrm{eff}}(\omega,W,H)
+\beta(\omega,W,H) = \frac{\omega}{c} n_{\mathrm{eff}}(\omega,W,H)
 $$
 
 where \(c\) is the speed of light in vacuum.
@@ -55,7 +53,7 @@ Waveguide dispersion will be characterized using derivatives of the propagation 
 The group-velocity dispersion parameter is:
 
 $$
-\beta_2 = \frac{\partial^2\beta}{\partial\omega^2}
+\beta_2 = \frac{\partial^2 \beta}{\partial \omega^2}
 $$
 
 Numerical differentiation will be used where analytical derivatives are unavailable.
@@ -65,19 +63,19 @@ Numerical differentiation will be used where analytical derivatives are unavaila
 For degenerate four-wave mixing, energy conservation requires:
 
 $$
-2\omega_p = \omega_s+\omega_i
+2\omega_p = \omega_s + \omega_i
 $$
 
-The linear phase mismatch is:
+The linear phase mismatch is defined as:
 
 $$
-\Delta\beta_{\mathrm{lin}}
-=
-2\beta_p-\beta_s-\beta_i
+\Delta\beta_{\mathrm{lin}} = 2\beta_p-\beta_s-\beta_i
 $$
+
+where \(\beta_p\), \(\beta_s\), and \(\beta_i\) represent the propagation constants of the pump, signal, and idler waves, respectively.
 
 The total phase mismatch will also account for nonlinear phase contributions when the nonlinear propagation model is introduced.
 
 Phase matching will initially be investigated by evaluating the linear mismatch over the relevant signal and idler frequency range.
 
-The effects of pump wavelength and waveguide geometry will then
+The effects of pump wavelength and waveguide geometry will then be compared.
