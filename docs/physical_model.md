@@ -12,15 +12,15 @@ In degenerate four-wave mixing, two pump photons interact with a signal field to
 
 The energy conservation condition is:
 
-\[
+$$
 2\omega_p = \omega_s + \omega_i
-\]
+$$
 
 where:
 
-- \(\omega_p\): Pump angular frequency
-- \(\omega_s\): Signal angular frequency
-- \(\omega_i\): Idler angular frequency
+- $\omega_p$: Pump angular frequency
+- $\omega_s$: Signal angular frequency
+- $\omega_i$: Idler angular frequency
 
 ## 3. Phase-Matching Condition
 
@@ -28,12 +28,11 @@ Efficient four-wave mixing requires an appropriate phase relationship between th
 
 The linear phase mismatch is defined as:
 
-\[
-\Delta\beta_{\mathrm{lin}}
-= 2\beta_p-\beta_s-\beta_i
-\]
+$$
+\Delta\beta_{\mathrm{lin}} = 2\beta_p-\beta_s-\beta_i
+$$
 
-where \(\beta_p\), \(\beta_s\), and \(\beta_i\) are the propagation constants of the pump, signal, and idler waves, respectively.
+where $\beta_p$, $\beta_s$, and $\beta_i$ are the propagation constants of the pump, signal, and idler waves, respectively.
 
 The total phase mismatch may also include nonlinear contributions associated with the optical intensities and nonlinear refractive index.
 
@@ -41,14 +40,14 @@ The total phase mismatch may also include nonlinear contributions associated wit
 
 The propagation constant depends on angular frequency and waveguide geometry:
 
-\[
+$$
 \beta = \beta(\omega,W,H)
-\]
+$$
 
 where:
 
-- \(W\): Waveguide width
-- \(H\): Waveguide core thickness
+- $W$: Waveguide width
+- $H$: Waveguide core thickness
 
 Changes in waveguide geometry can modify modal confinement and dispersion, thereby influencing the phase-matching conditions.
 
