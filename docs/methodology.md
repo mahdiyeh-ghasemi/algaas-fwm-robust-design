@@ -1,4 +1,3 @@
-
 # Methodology: Numerical Modeling and Fabrication-Tolerant Design
 
 ## 1. Research Workflow
@@ -11,9 +10,9 @@ The methodology is organized into five stages:
 2. Calculation of modal properties and waveguide dispersion.
 3. Evaluation of phase-matching conditions.
 4. Analysis of sensitivity to geometrical variations.
-5. Numerical optimization of fabrication-tolerant geometries.
+5. Investigation of fabrication-tolerant geometries.
 
-The model will be developed progressively, with assumptions and parameter sources documented at each stage.
+The model is developed progressively, with assumptions and parameter sources documented at each stage. The current work focuses on numerical modeling and preliminary sensitivity analysis.
 
 ## 2. Material and Geometrical Parameters
 
@@ -269,21 +268,20 @@ The numerical results are stored in `sensitivity_coefficients.csv` and can be re
 
 **Figure 4.** Dimensionless sensitivity coefficients of the effective refractive index with respect to core width and thickness for the four calculated modes.
 
-## 10. Phase Matching and Fabrication-Tolerant Optimization
+## 10. Phase Matching and Fabrication-Tolerant Design
 
-The next stage of the project will investigate four-wave-mixing phase-matching conditions using the calculated modal propagation constants.
+Four-wave-mixing phase matching is investigated using the calculated modal propagation constants. The analysis evaluates the linear phase mismatch for interacting pump, signal, and idler waves.
 
-The phase mismatch will be evaluated for the interacting pump, signal, and idler waves.
+The subsequent sensitivity analysis examines how changes in waveguide geometry influence the calculated phase mismatch. In particular, core width and thickness variations are considered around the nominal waveguide geometry.
 
-Subsequently, the sensitivity of phase matching to variations in waveguide width, core thickness, and material composition will be investigated.
-
-The final objective is to identify geometrical configurations that maintain acceptable phase-matching conditions under realistic fabrication variations.
+The present analysis provides a preliminary numerical assessment of phase mismatch and its dependence on spatial discretization and geometrical variations. It does not yet establish an optimized phase-matched design or demonstrate fabrication tolerance under experimental conditions.
 
 ## 11. Mesh Sensitivity of FWM Phase Mismatch
 
 The influence of spatial discretization on the calculated four-wave mixing (FWM) phase mismatch was examined using two grid spacings: 0.0125 µm and 0.00625 µm.
 
 Three waveguide configurations were evaluated:
+
 - Nominal geometry: width = 0.75 µm, thickness = 0.35 µm.
 - Reduced width: width = 0.74 µm, thickness = 0.35 µm.
 - Reduced thickness: width = 0.75 µm, thickness = 0.34 µm.
@@ -303,3 +301,27 @@ The relative differences between the two grid resolutions were approximately 1.6
 These results indicate a moderate dependence of the calculated phase mismatch on spatial discretization. The comparison provides a preliminary numerical sensitivity check rather than a complete mesh-convergence demonstration, since only two grid resolutions were considered. Further refinement and geometry-boundary accuracy checks are required before drawing quantitative conclusions about fabrication tolerances.
 
 ![Mesh sensitivity of FWM phase mismatch](../figures/fwm_mesh_sensitivity.png)
+
+## 12. Geometrical Sensitivity of FWM Phase Mismatch
+
+The influence of waveguide geometry on the linear FWM phase mismatch was investigated by varying the core width and thickness around their nominal values.
+
+The pump wavelength was fixed at 1550 nm, with the signal frequency detuned by 1 THz from the pump. The idler frequency was determined through energy conservation.
+
+Five geometrical configurations were evaluated:
+
+| Geometry | Width (µm) | Thickness (µm) | Phase mismatch magnitude (m⁻¹) |
+|---|---:|---:|---:|
+| Width −0.01 µm | 0.74 | 0.35 | 44.0130 |
+| Nominal | 0.75 | 0.35 | 45.1689 |
+| Width +0.01 µm | 0.76 | 0.35 | 46.2922 |
+| Thickness −0.01 µm | 0.75 | 0.34 | 45.4615 |
+| Thickness +0.01 µm | 0.75 | 0.36 | 44.9180 |
+
+The results indicate that, within the investigated parameter range, the phase mismatch is more sensitive to changes in core width than to changes in core thickness.
+
+A width reduction of 0.01 µm decreased the mismatch magnitude by approximately 2.56%, whereas a width increase of the same amount increased it by approximately 2.49%. Thickness variations produced smaller changes, below 0.7%.
+
+These findings represent a preliminary numerical sensitivity assessment. They do not establish an optimized phase-matched design. The calculations use a simplified material and waveguide model, and further mesh refinement and broader parameter sweeps are needed.
+
+![Geometrical sensitivity of FWM phase mismatch](../figures/fwm_geometry_sensitivity.png)
