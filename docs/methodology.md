@@ -1,8 +1,9 @@
+
 # Methodology: Numerical Modeling and Fabrication-Tolerant Design
 
-## 1. Overview
+## 1. Research Workflow
 
-This project uses a numerical approach to investigate degenerate four-wave mixing (FWM) in AlGaAs-on-insulator (AlGaAsOI) waveguides.
+The project investigates the numerical design of AlGaAs-on-insulator waveguides for four-wave mixing (FWM), with an emphasis on phase matching and fabrication tolerance.
 
 The methodology is organized into five stages:
 
@@ -16,182 +17,152 @@ The model will be developed progressively, with assumptions and parameter source
 
 ## 2. Material and Geometrical Parameters
 
-The initial model will consider an AlGaAs core surrounded by an insulating lower-cladding layer and an upper-cladding environment.
+The initial model considers an AlGaAs core on a silica substrate, with air as the upper and lateral cladding.
 
 The main geometrical parameters are:
 
 - Waveguide width: \(W\)
 - Core thickness: \(H\)
 - Aluminium composition: \(x\)
+- Operating wavelength: \(\lambda\)
 
-The refractive indices of the constituent materials will be specified as functions of wavelength and, where necessary, composition.
+The initial numerical model uses the following parameters:
 
-The initial geometry and material parameters will be selected from published experimental studies. No parameter will be treated as an experimentally validated value unless supported by a suitable reference.
+| Parameter | Value |
+|---|---:|
+| Operating wavelength | 1.55 µm |
+| Core width | 0.75 µm |
+| Core thickness | 0.35 µm |
+| Aluminium fraction | 0.21 |
+| Grid spacing | 0.00625 µm |
+| Simulation window | 4 × 4 µm |
+| Number of calculated modes | 4 |
 
-## 3. Modal Analysis and Dispersion Calculation
+The AlGaAs refractive index is calculated using a wavelength-dependent dispersion model based on Adachi-type expressions. The silica refractive index is calculated using the Sellmeier equation.
 
-The fundamental transverse-electric (TE) mode will be investigated first.
+The substrate is represented numerically as a silica region extending to the lower boundary of the computational window. Air is used in the upper and lateral cladding regions.
 
-For each waveguide geometry, the effective refractive index will be calculated as a function of wavelength:
+These parameters define an initial computational model and are not intended to represent a fully validated fabrication stack.
 
-$$
-n_{\mathrm{eff}} = n_{\mathrm{eff}}(\lambda,W,H)
-$$
+## 3. Waveguide Eigenmode Analysis
 
-The propagation constant is then obtained from:
+The guided modes are calculated using a finite-difference eigenmode solver.
 
-$$
-\beta(\omega,W,H) = \frac{\omega}{c} n_{\mathrm{eff}}(\omega,W,H)
-$$
+The transverse computational domain is discretized using a uniform spatial grid. The relative-permittivity distribution is constructed from the refractive indices of the AlGaAs core, silica substrate, and air cladding.
 
-where \(c\) is the speed of light in vacuum.
+The eigenmode solver calculates the effective indices and electromagnetic field components of the supported modes.
 
-The propagation constant will be evaluated over a wavelength range covering the pump, signal, and idler frequencies.
+The propagation constant is obtained from:
 
-Waveguide dispersion will be characterized using derivatives of the propagation constant with respect to angular frequency.
+\[
+\beta = \frac{2\pi}{\lambda}n_{\mathrm{eff}}
+\]
 
-The group-velocity dispersion parameter is:
+The calculations are repeated over the wavelength range of interest to characterize the wavelength dependence of the modal properties.
 
-$$
-\beta_2 = \frac{\partial^2 \beta}{\partial \omega^2}
-$$
+### 3.1 Modal Field Profiles
 
-Numerical differentiation will be used where analytical derivatives are unavailable.
+The transverse and longitudinal electric-field components are combined to visualize the spatial field distribution of each calculated mode.
 
-## 4. Four-Wave Mixing Phase Matching
+For each mode, the total electric-field magnitude is evaluated as:
 
-For degenerate four-wave mixing, energy conservation requires:
+\[
+|E| = \sqrt{|E_x|^2+|E_y|^2+|E_z|^2}
+\]
 
-$$
-2\omega_p = \omega_s + \omega_i
-$$
+The resulting field profiles are presented in Figure 1. Four guided modes are obtained using the numerical eigenmode solver.
 
-where:
+![Comparison of the four calculated modal field profiles](../figures/all_modes_comparison.png)
 
-- $\omega_p$ is the pump angular frequency.
-- $\omega_s$ is the signal angular frequency.
-- $\omega_i$ is the idler angular frequency.
+**Figure 1.** Spatial electric-field magnitude distributions of the four calculated waveguide modes. Each panel shows one mode.
 
-The linear phase mismatch is defined as:
+## 4. Numerical Mesh Convergence
 
-$$
-\Delta\beta_{\mathrm{lin}} = 2\beta_p - \beta_s - \beta_i
-$$
+The influence of spatial discretization on the calculated effective indices is assessed by repeating the eigenmode calculations with different grid spacings.
 
-where:
-
-- $\beta_p$ is the pump propagation constant.
-- $\beta_s$ is the signal propagation constant.
-- $\beta_i$ is the idler propagation constant.
-
-Efficient four-wave mixing requires the total phase mismatch to be sufficiently close to zero. In addition to the linear contribution, the total phase mismatch may include nonlinear contributions arising from the Kerr effect and optical intensities.
-
-The total phase mismatch can be expressed generally as:
-
-$$
-\Delta\beta_{\mathrm{total}} = \Delta\beta_{\mathrm{lin}} + \Delta\beta_{\mathrm{NL}}
-$$
-
-where $\Delta\beta_{\mathrm{NL}}$ represents the nonlinear phase-mismatch contribution.
-
-Phase matching will initially be investigated by evaluating the linear mismatch over the relevant signal and idler frequency range. Nonlinear contributions will be incorporated in a subsequent modeling stage.
-
-The effects of pump wavelength and waveguide geometry on phase matching will then be compared.
-
-## 5. Numerical Convergence Test
-
-A mesh-convergence test was performed to evaluate the numerical stability of the calculated effective refractive indices.
-
-Three spatial grid resolutions were investigated:
+The following grid spacings are considered:
 
 - 0.025 µm
 - 0.0125 µm
 - 0.00625 µm
 
-The calculated effective refractive indices are summarized below.
+The effective indices obtained at successive grid resolutions are compared to evaluate numerical convergence.
 
-| Grid spacing (µm) | Mode 1 | Mode 2 | Mode 3 | Mode 4 |
-|---|---:|---:|---:|---:|
-| 0.025 | 2.789443 | 2.484256 | 2.184165 | 2.042173 |
-| 0.0125 | 2.790239 | 2.482065 | 2.179440 | 2.037194 |
-| 0.00625 | 2.790250 | 2.481024 | 2.176761 | 2.034373 |
+The results indicate that the fundamental mode is relatively stable with respect to mesh refinement. Higher-order modes exhibit larger changes and therefore require additional convergence assessment.
 
-The relative changes between the two finest grid resolutions were:
+## 5. Computational Domain Size Convergence
 
-| Mode | Relative change (%) |
-|---|---:|
-| Mode 1 | 0.0004 |
-| Mode 2 | 0.0420 |
-| Mode 3 | 0.1231 |
-| Mode 4 | 0.1387 |
+The influence of the computational window size is evaluated by comparing the calculated effective indices for different domain dimensions.
 
-The results indicate strong numerical stability for Mode 1. Modes 2–4 exhibit larger changes and require further convergence assessment.
+The 4 × 4 µm computational window is compared with a 3 × 3 µm window while maintaining the same spatial grid spacing.
 
-Therefore, the finest grid is retained for subsequent numerical investigations. These results represent a preliminary mesh-convergence assessment and do not, by themselves, establish the physical accuracy of the waveguide model.
+The calculated effective indices show negligible differences between the two domain sizes for the four modes considered.
 
-## 6. Computational Domain Size Convergence
+The field magnitude near the computational boundaries is also examined to assess possible boundary effects.
 
-A computational-domain convergence test was performed to assess the influence of the simulation window size on the calculated modal effective refractive indices.
+## 6. Modal Polarization Analysis
 
-The simulation window was increased from 3 × 3 µm² to 4 × 4 µm² while keeping the spatial grid spacing fixed at 0.00625 µm.
+The relative contributions of the electric-field components are evaluated for each calculated mode.
 
-The calculated effective refractive indices were compared for the four computed modes. The relative changes were negligible:
-
-| Mode | Relative change (%) |
-|---|---:|
-| Mode 1 | 0 |
-| Mode 2 | 0 |
-| Mode 3 | 0 |
-| Mode 4 | 0.00000197 |
-
-The results indicate that the calculated effective refractive indices are insensitive to the increase in computational-domain size over the tested range.
-
-Additionally, the maximum electric-field magnitude at the boundaries of the 3 × 3 µm² computational window was approximately 0.00021% of its global maximum for Mode 1.
-
-These results provide preliminary evidence that the computational domain is sufficiently large for the calculated modal properties. Further validation of modal field confinement and boundary-condition effects remains necessary.
-
-## 7. Modal Polarization Analysis
-
-The electric-field components of the calculated waveguide modes were analyzed to characterize their transverse polarization properties.
-
-For each mode, the squared magnitudes of the transverse electric-field components were summed over the computational grid:
+The transverse component indicators are defined as:
 
 \[
-S_x = \sum_{i,j}|E_x(i,j)|^2
+R_x = \frac{\sum |E_x|^2}
+{\sum |E_x|^2+\sum |E_y|^2}
 \]
 
 \[
-S_y = \sum_{i,j}|E_y(i,j)|^2
+R_y = \frac{\sum |E_y|^2}
+{\sum |E_x|^2+\sum |E_y|^2}
 \]
 
-The normalized transverse component ratios were then calculated as:
+The longitudinal-field indicator is defined as:
 
 \[
-P_x = \frac{S_x}{S_x+S_y}
+R_z = \frac{\sum |E_z|^2}
+{\sum |E_x|^2+\sum |E_y|^2+\sum |E_z|^2}
 \]
 
-\[
-P_y = \frac{S_y}{S_x+S_y}
-\]
+These quantities are normalized squared-field component indicators. They are not physical modal power fractions, which would require evaluation of the Poynting flux.
 
-The longitudinal component was also evaluated using:
-
-\[
-P_z = \frac{S_z}{S_x+S_y+S_z}
-\]
-
-where:
-
-\[
-S_z = \sum_{i,j}|E_{zj}(i,j)|^2
-\]
-
-These quantities are squared-field component metrics and should not be interpreted as physical modal power fractions.
-
-The results indicate that Modes 1 and 3 are predominantly x-oriented in their transverse electric fields, whereas Modes 2 and 4 are predominantly y-oriented.
-
-The calculated component distributions are shown in Figure 2.
+The calculated results indicate that modes 1 and 3 are predominantly x-oriented in their transverse electric-field components, whereas modes 2 and 4 are predominantly y-oriented.
 
 ![Modal polarization analysis](../figures/polarization_analysis.png)
 
-**Figure 2.** Normalized squared-field component metrics for the four calculated waveguide modes.
+**Figure 2.** Normalized squared-field component indicators for the four calculated modes.
+
+## 7. Waveguide Dispersion Analysis
+
+Waveguide dispersion is characterized using derivatives of the propagation constant with respect to angular frequency.
+
+The group-velocity dispersion parameter is:
+
+\[
+\beta_2 = \frac{\partial^2 \beta}{\partial \omega^2}
+\]
+
+The propagation constant is calculated from the wavelength-dependent effective index obtained from the eigenmode solver.
+
+To evaluate the second-order derivative, the angular-frequency data are normalized and fitted using a fourth-degree polynomial. The analytical second derivative of the fitted polynomial is then evaluated over the wavelength range.
+
+The polynomial degree is assessed by comparing degrees two through five. At 1550 nm, the fourth- and fifth-degree fits produce nearly identical values of \(\beta_2\).
+
+The fourth-degree fit is also tested for sensitivity to endpoint removal. Removing up to three data points from each end of the wavelength interval results in negligible changes in the calculated value at 1550 nm.
+
+These tests assess numerical fitting stability but do not independently validate the physical accuracy of the material or waveguide model.
+
+The calculated effective-index and group-velocity-dispersion curves are presented in Figure 3.
+
+![Waveguide dispersion analysis](../figures/dispersion_analysis.png)
+
+**Figure 3.** Effective refractive index and calculated group-velocity dispersion as functions of wavelength.
+
+## 8. Phase Matching and Fabrication Tolerance
+
+The next stage of the project will investigate four-wave-mixing phase-matching conditions using the calculated modal propagation constants.
+
+The phase mismatch will be evaluated for the interacting pump, signal, and idler waves.
+
+Subsequently, the sensitivity of phase matching to variations in waveguide width, core thickness, and material composition will be investigated.
+
+The final objective is to identify geometrical configurations that maintain acceptable phase-matching conditions under realistic fabrication variations.

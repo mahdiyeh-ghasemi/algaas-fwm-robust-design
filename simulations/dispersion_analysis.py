@@ -7,17 +7,15 @@ import pandas as pd
 from src.dispersion import calculate_dispersion
 
 
-# Project directories
 ROOT_DIR = Path(__file__).resolve().parents[1]
-DATA_FILE = ROOT_DIR / "data" / "dispersion_data.csv"
+DATA_FILE = ROOT_DIR / "dispersion_data.csv"
 FIGURE_DIR = ROOT_DIR / "figures"
 
 
 def main():
     if not DATA_FILE.exists():
         raise FileNotFoundError(
-            f"Dispersion data file not found: {DATA_FILE}\n"
-            "Expected columns: wavelength_nm, n_eff"
+            f"Dispersion data file not found: {DATA_FILE}"
         )
 
     data = pd.read_csv(DATA_FILE)
@@ -48,15 +46,21 @@ def main():
         n_eff
     )
 
-    # Sort results by increasing wavelength for plotting
-    wavelength_plot_nm = 2.0 * np.pi * 299792458.0 / omega * 1e9
-    order = np.argsort(wavelength_plot_nm)
+    # Sort by increasing wavelength
+    order = np.argsort(wavelength_m)
 
-    wavelength_plot_nm = wavelength_plot_nm[order]
-    n_eff_plot = n_eff[np.argsort(wavelength_nm)]
-    beta2_plot = beta2[order]
+    wavelength_plot_nm = wavelength_m[order] * 1e9
+    n_eff_plot = n_eff[order]
 
-    # Convert beta2 from s^2/m to ps^2/km
+    # Match beta2 values to increasing wavelength
+    wavelength_from_omega_nm = (
+        2.0 * np.pi * 299792458.0 / omega * 1e9
+    )
+
+    beta2_order = np.argsort(wavelength_from_omega_nm)
+    beta2_plot = beta2[beta2_order]
+
+    # Convert from s^2/m to ps^2/km
     beta2_ps2_km = beta2_plot * 1e27
 
     FIGURE_DIR.mkdir(parents=True, exist_ok=True)
@@ -80,6 +84,8 @@ def main():
     fig.savefig(output_file, dpi=300, bbox_inches="tight")
 
     print(f"Dispersion analysis saved to: {output_file}")
+
+    plt.close(fig)
 
 
 if __name__ == "__main__":
