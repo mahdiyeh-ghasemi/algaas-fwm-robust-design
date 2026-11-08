@@ -278,3 +278,28 @@ The phase mismatch will be evaluated for the interacting pump, signal, and idler
 Subsequently, the sensitivity of phase matching to variations in waveguide width, core thickness, and material composition will be investigated.
 
 The final objective is to identify geometrical configurations that maintain acceptable phase-matching conditions under realistic fabrication variations.
+
+## 11. Mesh Sensitivity of FWM Phase Mismatch
+
+The influence of spatial discretization on the calculated four-wave mixing (FWM) phase mismatch was examined using two grid spacings: 0.0125 µm and 0.00625 µm.
+
+Three waveguide configurations were evaluated:
+- Nominal geometry: width = 0.75 µm, thickness = 0.35 µm.
+- Reduced width: width = 0.74 µm, thickness = 0.35 µm.
+- Reduced thickness: width = 0.75 µm, thickness = 0.34 µm.
+
+For each configuration, the fundamental-mode effective index was recalculated over 21 wavelengths between 1.50 and 1.60 µm. The linear phase mismatch was then evaluated for a pump wavelength of 1550 nm and a signal frequency detuned by 1 THz.
+
+The calculated phase mismatch magnitudes were:
+
+| Geometry | Grid = 0.0125 µm (m⁻¹) | Grid = 0.00625 µm (m⁻¹) |
+|---|---:|---:|
+| Nominal | 45.9051 | 45.1689 |
+| Reduced width | 43.6062 | 44.0130 |
+| Reduced thickness | 46.5919 | 45.4615 |
+
+The relative differences between the two grid resolutions were approximately 1.6%, 0.9%, and 2.4% for the nominal, reduced-width, and reduced-thickness configurations, respectively.
+
+These results indicate a moderate dependence of the calculated phase mismatch on spatial discretization. The comparison provides a preliminary numerical sensitivity check rather than a complete mesh-convergence demonstration, since only two grid resolutions were considered. Further refinement and geometry-boundary accuracy checks are required before drawing quantitative conclusions about fabrication tolerances.
+
+![Mesh sensitivity of FWM phase mismatch](../figures/fwm_mesh_sensitivity.png)

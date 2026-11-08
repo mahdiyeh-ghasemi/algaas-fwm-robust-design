@@ -1,0 +1,7 @@
+grid_spacing_um,geometry,width_um,thickness_um,delta_beta_per_m
+0.0125,nominal,0.75,0.35,-45.90509710647166
+0.0125,width_minus,0.74,0.35,-43.60622504167259
+0.0125,thickness_minus,0.75,0.34,-46.5918522849679
+0.00625,nominal,0.75,0.35,-45.16894021630287
+0.00625,width_minus,0.74,0.35,-44.01296163164079
+0.00625,thickness_minus,0.75,0.34,-45.46149770729244
