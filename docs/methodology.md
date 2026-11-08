@@ -66,16 +66,34 @@ $$
 2\omega_p = \omega_s + \omega_i
 $$
 
+where:
+
+- \(\omega_p\) is the pump angular frequency.
+- \(\omega_s\) is the signal angular frequency.
+- \(\omega_i\) is the idler angular frequency.
+
 The linear phase mismatch is defined as:
 
 $$
-\Delta\beta_{\mathrm{lin}} = 2\beta_p-\beta_s-\beta_i
+\Delta\beta_{\mathrm{lin}} = 2\beta_p - \beta_s - \beta_i
 $$
 
 where \(\beta_p\), \(\beta_s\), and \(\beta_i\) represent the propagation constants of the pump, signal, and idler waves, respectively.
 
-The total phase mismatch will also account for nonlinear phase contributions when the nonlinear propagation model is introduced.
+Efficient four-wave mixing requires the total phase mismatch to be sufficiently close to zero. In addition to the linear contribution, the total phase mismatch may include nonlinear contributions arising from the Kerr effect and optical intensities.
 
-Phase matching will initially be investigated by evaluating the linear mismatch over the relevant signal and idler frequency range.
+The total phase mismatch can therefore be expressed generally as:
 
-The effects of pump wavelength and waveguide geometry will then be compared.
+$$
+\Delta\beta_{\mathrm{total}}
+=
+\Delta\beta_{\mathrm{lin}}
++
+\Delta\beta_{\mathrm{NL}}
+$$
+
+where \(\Delta\beta_{\mathrm{NL}}\) represents the nonlinear phase-mismatch contribution.
+
+Phase matching will initially be investigated by evaluating the linear mismatch over the relevant signal and idler frequency range. Nonlinear contributions will be incorporated in a subsequent modeling stage.
+
+The effects of pump wavelength and waveguide geometry on phase matching will then be compared.
