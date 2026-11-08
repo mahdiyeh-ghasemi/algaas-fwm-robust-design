@@ -157,6 +157,34 @@ The calculated effective-index and group-velocity-dispersion curves are presente
 
 **Figure 3.** Effective refractive index and calculated group-velocity dispersion as functions of wavelength.
 
+### 7.1 Modal Identity Tracking
+
+To assess the continuity of the calculated modes across the wavelength range, an electric-field overlap analysis is performed between consecutive wavelength points.
+
+For each pair of adjacent wavelengths, the normalized squared overlap between the electric-field distributions is calculated:
+
+\[
+O_{ij} =
+\frac{
+|\langle E_i(\lambda_k), E_j(\lambda_{k+1}) \rangle|^2
+}{
+\langle E_i(\lambda_k), E_i(\lambda_k) \rangle
+\langle E_j(\lambda_{k+1}), E_j(\lambda_{k+1}) \rangle
+}
+\]
+
+The overlap calculation combines the three electric-field components \(E_x\), \(E_y\), and \(E_z\). The mode correspondence between successive wavelength points is determined by maximizing the total overlap using the linear assignment algorithm.
+
+The discrete inner product is evaluated as a sum over all transverse grid points and the three electric-field components, using the same spatial grid at both wavelengths.
+
+For the wavelength sweep from 1500 nm to 1600 nm, with a 5 nm increment, the calculated mode correspondence remains unchanged across all consecutive wavelength pairs.
+
+The minimum matched overlap obtained in this analysis is approximately 0.999963.
+
+These results indicate strong continuity of the calculated electric-field profiles across the sampled wavelength range. They support the use of the fundamental-mode effective-index data for the current dispersion analysis.
+
+This overlap analysis is a numerical mode-tracking check. It does not independently establish the physical accuracy of the waveguide model or replace validation against experimental or reference data.
+
 ## 8. Phase Matching and Fabrication Tolerance
 
 The next stage of the project will investigate four-wave-mixing phase-matching conditions using the calculated modal propagation constants.
