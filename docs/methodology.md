@@ -149,3 +149,49 @@ The results indicate that the calculated effective refractive indices are insens
 Additionally, the maximum electric-field magnitude at the boundaries of the 3 × 3 µm² computational window was approximately 0.00021% of its global maximum for Mode 1.
 
 These results provide preliminary evidence that the computational domain is sufficiently large for the calculated modal properties. Further validation of modal field confinement and boundary-condition effects remains necessary.
+
+## 7. Modal Polarization Analysis
+
+The electric-field components of the calculated waveguide modes were analyzed to characterize their transverse polarization properties.
+
+For each mode, the squared magnitudes of the transverse electric-field components were summed over the computational grid:
+
+\[
+S_x = \sum_{i,j}|E_x(i,j)|^2
+\]
+
+\[
+S_y = \sum_{i,j}|E_y(i,j)|^2
+\]
+
+The normalized transverse component ratios were then calculated as:
+
+\[
+P_x = \frac{S_x}{S_x+S_y}
+\]
+
+\[
+P_y = \frac{S_y}{S_x+S_y}
+\]
+
+The longitudinal component was also evaluated using:
+
+\[
+P_z = \frac{S_z}{S_x+S_y+S_z}
+\]
+
+where:
+
+\[
+S_z = \sum_{i,j}|E_{zj}(i,j)|^2
+\]
+
+These quantities are squared-field component metrics and should not be interpreted as physical modal power fractions.
+
+The results indicate that Modes 1 and 3 are predominantly x-oriented in their transverse electric fields, whereas Modes 2 and 4 are predominantly y-oriented.
+
+The calculated component distributions are shown in Figure 2.
+
+![Modal polarization analysis](../figures/polarization_analysis.png)
+
+**Figure 2.** Normalized squared-field component metrics for the four calculated waveguide modes.
