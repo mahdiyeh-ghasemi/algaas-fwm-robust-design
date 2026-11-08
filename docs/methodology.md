@@ -97,3 +97,34 @@ where $\Delta\beta_{\mathrm{NL}}$ represents the nonlinear phase-mismatch contri
 Phase matching will initially be investigated by evaluating the linear mismatch over the relevant signal and idler frequency range. Nonlinear contributions will be incorporated in a subsequent modeling stage.
 
 The effects of pump wavelength and waveguide geometry on phase matching will then be compared.
+
+## 5. Numerical Convergence Test
+
+A mesh-convergence test was performed to evaluate the numerical stability of the calculated effective refractive indices.
+
+Three spatial grid resolutions were investigated:
+
+- 0.025 µm
+- 0.0125 µm
+- 0.00625 µm
+
+The calculated effective refractive indices are summarized below.
+
+| Grid spacing (µm) | Mode 1 | Mode 2 | Mode 3 | Mode 4 |
+|---|---:|---:|---:|---:|
+| 0.025 | 2.789443 | 2.484256 | 2.184165 | 2.042173 |
+| 0.0125 | 2.790239 | 2.482065 | 2.179440 | 2.037194 |
+| 0.00625 | 2.790250 | 2.481024 | 2.176761 | 2.034373 |
+
+The relative changes between the two finest grid resolutions were:
+
+| Mode | Relative change (%) |
+|---|---:|
+| Mode 1 | 0.0004 |
+| Mode 2 | 0.0420 |
+| Mode 3 | 0.1231 |
+| Mode 4 | 0.1387 |
+
+The results indicate strong numerical stability for Mode 1. Modes 2–4 exhibit larger changes and require further convergence assessment.
+
+Therefore, the finest grid is retained for subsequent numerical investigations. These results represent a preliminary mesh-convergence assessment and do not, by themselves, establish the physical accuracy of the waveguide model.
