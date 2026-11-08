@@ -78,18 +78,18 @@ $$
 \Delta\beta_{\mathrm{lin}} = 2\beta_p - \beta_s - \beta_i
 $$
 
-where \(\beta_p\), \(\beta_s\), and \(\beta_i\) represent the propagation constants of the pump, signal, and idler waves, respectively.
+where:
+
+- \(\beta_p\) is the pump propagation constant.
+- \(\beta_s\) is the signal propagation constant.
+- \(\beta_i\) is the idler propagation constant.
 
 Efficient four-wave mixing requires the total phase mismatch to be sufficiently close to zero. In addition to the linear contribution, the total phase mismatch may include nonlinear contributions arising from the Kerr effect and optical intensities.
 
-The total phase mismatch can therefore be expressed generally as:
+The total phase mismatch can be expressed generally as:
 
 $$
-\Delta\beta_{\mathrm{total}}
-=
-\Delta\beta_{\mathrm{lin}}
-+
-\Delta\beta_{\mathrm{NL}}
+\Delta\beta_{\mathrm{total}} = \Delta\beta_{\mathrm{lin}} + \Delta\beta_{\mathrm{NL}}
 $$
 
 where \(\Delta\beta_{\mathrm{NL}}\) represents the nonlinear phase-mismatch contribution.
