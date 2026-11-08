@@ -62,37 +62,37 @@ Numerical differentiation will be used where analytical derivatives are unavaila
 
 For degenerate four-wave mixing, energy conservation requires:
 
-$$
-2\omega_p = \omega_s + \omega_i
-$$
+**Energy conservation:**
+
+`2 * omega_p = omega_s + omega_i`
 
 where:
 
-- \(\omega_p\) is the pump angular frequency.
-- \(\omega_s\) is the signal angular frequency.
-- \(\omega_i\) is the idler angular frequency.
+- `omega_p` is the pump angular frequency.
+- `omega_s` is the signal angular frequency.
+- `omega_i` is the idler angular frequency.
 
 The linear phase mismatch is defined as:
 
-$$
-\Delta\beta_{\mathrm{lin}} = 2\beta_p - \beta_s - \beta_i
-$$
+**Linear phase mismatch:**
+
+`Delta_beta_lin = 2 * beta_p - beta_s - beta_i`
 
 where:
 
-- \(\beta_p\) is the pump propagation constant.
-- \(\beta_s\) is the signal propagation constant.
-- \(\beta_i\) is the idler propagation constant.
+- `beta_p` is the pump propagation constant.
+- `beta_s` is the signal propagation constant.
+- `beta_i` is the idler propagation constant.
 
 Efficient four-wave mixing requires the total phase mismatch to be sufficiently close to zero. In addition to the linear contribution, the total phase mismatch may include nonlinear contributions arising from the Kerr effect and optical intensities.
 
 The total phase mismatch can be expressed generally as:
 
-$$
-\Delta\beta_{\mathrm{total}} = \Delta\beta_{\mathrm{lin}} + \Delta\beta_{\mathrm{NL}}
-$$
+**Total phase mismatch:**
 
-where \(\Delta\beta_{\mathrm{NL}}\) represents the nonlinear phase-mismatch contribution.
+`Delta_beta_total = Delta_beta_lin + Delta_beta_NL`
+
+where `Delta_beta_NL` represents the nonlinear phase-mismatch contribution.
 
 Phase matching will initially be investigated by evaluating the linear mismatch over the relevant signal and idler frequency range. Nonlinear contributions will be incorporated in a subsequent modeling stage.
 
