@@ -128,3 +128,24 @@ The relative changes between the two finest grid resolutions were:
 The results indicate strong numerical stability for Mode 1. Modes 2–4 exhibit larger changes and require further convergence assessment.
 
 Therefore, the finest grid is retained for subsequent numerical investigations. These results represent a preliminary mesh-convergence assessment and do not, by themselves, establish the physical accuracy of the waveguide model.
+
+## 6. Computational Domain Size Convergence
+
+A computational-domain convergence test was performed to assess the influence of the simulation window size on the calculated modal effective refractive indices.
+
+The simulation window was increased from 3 × 3 µm² to 4 × 4 µm² while keeping the spatial grid spacing fixed at 0.00625 µm.
+
+The calculated effective refractive indices were compared for the four computed modes. The relative changes were negligible:
+
+| Mode | Relative change (%) |
+|---|---:|
+| Mode 1 | 0 |
+| Mode 2 | 0 |
+| Mode 3 | 0 |
+| Mode 4 | 0.00000197 |
+
+The results indicate that the calculated effective refractive indices are insensitive to the increase in computational-domain size over the tested range.
+
+Additionally, the maximum electric-field magnitude at the boundaries of the 3 × 3 µm² computational window was approximately 0.00021% of its global maximum for Mode 1.
+
+These results provide preliminary evidence that the computational domain is sufficiently large for the calculated modal properties. Further validation of modal field confinement and boundary-condition effects remains necessary.
