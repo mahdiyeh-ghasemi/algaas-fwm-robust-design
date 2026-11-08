@@ -76,19 +76,33 @@ The resulting field profiles are presented in Figure 1. Four guided modes are ob
 
 **Figure 1.** Spatial electric-field magnitude distributions of the four calculated waveguide modes. Each panel shows one mode.
 
-## 4. Numerical Mesh Convergence
+## 4. Mesh Convergence Analysis
 
-The influence of spatial discretization on the calculated effective indices is assessed by repeating the eigenmode calculations with different grid spacings.
+A mesh convergence analysis is performed to evaluate the sensitivity of the calculated effective indices to the spatial discretization of the computational domain.
 
-The following grid spacings are considered:
+Three grid spacings are considered:
 
 - 0.025 µm
 - 0.0125 µm
 - 0.00625 µm
 
-The effective indices obtained at successive grid resolutions are compared to evaluate numerical convergence.
+For each grid resolution, the eigenmode solver is used to calculate the effective indices of the four guided modes at the reference wavelength of 1.55 µm. All other waveguide parameters and material properties are kept unchanged.
 
-The results indicate that the fundamental mode is relatively stable with respect to mesh refinement. Higher-order modes exhibit larger changes and therefore require additional convergence assessment.
+The calculated effective indices are summarized below.
+
+| Grid spacing (µm) | Mode 1 | Mode 2 | Mode 3 | Mode 4 |
+|---:|---:|---:|---:|---:|
+| 0.02500 | 2.789443 | 2.484256 | 2.184165 | 2.042173 |
+| 0.01250 | 2.790239 | 2.482065 | 2.179440 | 2.037194 |
+| 0.00625 | 2.790250 | 2.481024 | 2.176761 | 2.034373 |
+
+The relative changes in effective index between the two finest grid resolutions are approximately 0.0004%, 0.0420%, 0.1231%, and 0.1387% for modes 1–4, respectively.
+
+The results indicate that the fundamental-mode effective index is highly stable under the tested mesh refinement. The higher-order modes exhibit larger changes, suggesting that their numerical convergence is less complete and requires further investigation.
+
+The finest grid spacing of 0.00625 µm is therefore adopted for the subsequent simulations. This choice provides a stable fundamental-mode result while retaining the higher-order modes for further analysis.
+
+The numerical results are stored in `mesh_convergence.csv` and can be reproduced using `simulations/mesh_convergence.py`.
 
 ## 5. Computational Domain Size Convergence
 
