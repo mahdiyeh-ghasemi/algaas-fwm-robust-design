@@ -1,4 +1,4 @@
-# Fabrication-Tolerant Design of Four-Wave Mixing in AlGaAs-on-Insulator Waveguides
+# Numerical Analysis of Dispersion, Linear Phase Mismatch, and Geometric Sensitivity in AlGaAs-on-Insulator Waveguides for Four-Wave Mixing
 
 ## Project Overview
 
