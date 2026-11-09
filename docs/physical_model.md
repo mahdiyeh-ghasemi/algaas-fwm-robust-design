@@ -62,7 +62,7 @@ The wavelength dependence of the propagation constant is used to estimate the gr
 
 The propagation constant is calculated from the wavelength-dependent effective index.
 
-A polynomial fit to the calculated propagation-constant data is used to estimate its second derivative with respect to angular frequency.
+The angular-frequency data are normalized by subtracting their mean and dividing by half of their range. A fourth-degree polynomial is fitted to the propagation constant as a function of the normalized angular frequency. The second derivative is then evaluated analytically from the fitted polynomial and converted to the derivative with respect to angular frequency using the corresponding frequency-scale factor.
 
 Polynomial degrees and endpoint sensitivity are compared to assess numerical fitting stability.
 
@@ -101,7 +101,7 @@ The current FWM analysis uses:
 - Fundamental guided mode for all three frequency components.
 - Only signal–idler pairs within the sampled wavelength range are considered.
 
-The specific signal and idler wavelengths of approximately 1542.027 nm and 1558.056 nm are used in the geometrical sensitivity analysis.
+For the geometrical and mesh sensitivity analyses, the signal frequency is fixed at +1 THz relative to the pump frequency, and the idler frequency is determined through energy conservation. At a pump wavelength of 1550 nm, this corresponds to signal and idler wavelengths of approximately 1542.027 nm and 1558.056 nm, respectively. The same frequency configuration is used across the geometrical and mesh sensitivity calculations to ensure consistent comparisons.
 
 The current implementation evaluates the linear phase mismatch. It does not calculate nonlinear phase shifts, nonlinear conversion efficiency, or output power.
 

@@ -276,6 +276,8 @@ The subsequent sensitivity analysis examines how changes in waveguide geometry i
 
 The present analysis provides a preliminary numerical assessment of phase mismatch and its dependence on spatial discretization and geometrical variations. It does not yet establish an optimized phase-matched design or demonstrate fabrication tolerance under experimental conditions.
 
+The main FWM phase-matching analysis samples signal wavelengths from the available dispersion data and determines the corresponding idler frequencies through energy conservation. In contrast, the geometrical and mesh sensitivity analyses use a fixed signal-frequency detuning of +1 THz relative to the pump frequency. This distinction allows the main analysis to examine multiple signal–idler pairs, while the sensitivity analyses compare different geometries and grid resolutions under a consistent frequency configuration.
+
 ## 11. Mesh Sensitivity of FWM Phase Mismatch
 
 The influence of spatial discretization on the calculated four-wave mixing (FWM) phase mismatch was examined using two grid spacings: 0.0125 µm and 0.00625 µm.
