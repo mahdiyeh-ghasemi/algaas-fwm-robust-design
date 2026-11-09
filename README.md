@@ -1,45 +1,56 @@
-# Fabrication-Tolerant Design of Four-Wave Mixing in AlGaAs-on-Insulator Waveguides
+# Numerical Analysis of Dispersion, Linear Phase Mismatch, and Geometric Sensitivity in AlGaAs-on-Insulator Waveguides for Four-Wave Mixing
 
 ## Project Overview
 
-This project investigates the numerical modeling of degenerate four-wave mixing (FWM) in AlGaAs-on-insulator (AlGaAsOI) integrated optical waveguides, with an emphasis on modal properties, dispersion engineering, phase mismatch, and sensitivity to geometrical variations.
+Aluminium gallium arsenide (AlGaAs) is a promising material platform for nonlinear integrated photonics because of its strong optical nonlinearities and potential for compact on-chip frequency conversion. Understanding the interplay between waveguide geometry, modal dispersion, and phase matching is an important step toward the numerical design of efficient nonlinear photonic devices.
 
-The primary objective is to establish a reproducible computational framework for studying how waveguide geometry and numerical discretization influence the modal characteristics and linear FWM phase-matching conditions.
+This project develops a computational framework for analyzing degenerate four-wave mixing (FWM) in AlGaAs-on-insulator (AlGaAsOI) waveguides. It investigates the guided-mode properties, wavelength-dependent dispersion, linear phase mismatch, and sensitivity of these characteristics to geometrical variations and spatial discretization.
 
-The current work represents a preliminary numerical study rather than a validated or optimized device design.
+The numerical workflow combines finite-difference eigenmode analysis, modal-field characterization, dispersion extraction, and systematic geometry and mesh sensitivity studies. Particular attention is given to the consistency and reproducibility of the calculations.
+
+The present study is a preliminary numerical investigation of the linear modal and phase-matching properties of the waveguide. It does not yet include nonlinear propagation, pump-power-dependent phase matching, or experimental validation.
 
 ## Research Objectives
 
-- Calculate guided modes and their effective refractive indices.
-- Analyze modal field distributions and polarization characteristics.
-- Investigate waveguide dispersion and modal continuity across wavelength.
-- Evaluate linear FWM phase mismatch using calculated modal propagation constants.
-- Examine the sensitivity of modal properties and phase mismatch to geometrical variations.
-- Assess the influence of spatial discretization on the numerical results.
+The project addresses the following objectives:
+
+1. **Modal analysis:** Calculate the guided eigenmodes, effective refractive indices, and transverse field distributions of the AlGaAsOI waveguide.
+
+2. **Polarization characterization:** Examine the field-component distributions and polarization characteristics of the supported modes.
+
+3. **Dispersion analysis:** Calculate the wavelength-dependent propagation constants and group-velocity dispersion (GVD), while monitoring modal continuity across the investigated spectral range.
+
+4. **Linear FWM phase-matching analysis:** Evaluate the linear phase mismatch for degenerate four-wave mixing using the calculated propagation constants and energy conservation.
+
+5. **Geometrical sensitivity:** Quantify how variations in waveguide width and core thickness affect modal properties and linear FWM phase mismatch.
+
+6. **Numerical reliability:** Investigate the effects of computational domain size and spatial discretization on the calculated modal and FWM characteristics.
 
 ## Physical Platform and Initial Model
 
-- **Material platform:** AlGaAs core on a silica substrate.
-- **Upper and lateral cladding:** Air.
-- **Nonlinear process:** Degenerate four-wave mixing.
-- **Waveguide geometry:** Rectangular core.
-- **Numerical method:** Finite-difference eigenmode analysis.
+The numerical model considers a rectangular AlGaAs core on a silica substrate, with air as the upper and lateral cladding. The waveguide is analyzed using a finite-difference eigenmode approach to calculate its guided modes and wavelength-dependent propagation characteristics.
 
-### Nominal Parameters
+### Material Model
+
+- **Core:** Aluminium gallium arsenide (AlGaAs), with an aluminium mole fraction of 0.21.
+- **Substrate:** Silica (SiO₂).
+- **Upper and lateral cladding:** Air.
+- **AlGaAs refractive index:** Wavelength-dependent Adachi-type model.
+- **Silica refractive index:** Sellmeier dispersion relation.
+
+### Nominal Waveguide Parameters
 
 | Parameter | Value |
 |---|---:|
 | Operating wavelength | 1.55 µm |
 | Core width | 0.75 µm |
 | Core thickness | 0.35 µm |
-| Aluminium fraction | 0.21 |
-| Spatial grid spacing | 0.00625 µm |
+| Aluminium mole fraction | 0.21 |
+| Finest spatial grid spacing | 0.00625 µm |
 | Computational window | 4 × 4 µm |
-| Calculated modes | 4 |
+| Number of calculated modes | 4 |
 
-The AlGaAs refractive index is modeled using wavelength-dependent Adachi-type expressions, while the silica refractive index is calculated using the Sellmeier equation.
-
-The material and geometrical configuration represents a simplified computational model and should not be interpreted as a fully validated fabrication stack.
+The material and geometrical configuration define a simplified computational platform for numerical investigation. It is not intended to represent a fully optimized or experimentally validated fabrication stack.
 
 ## Current Implementation
 
