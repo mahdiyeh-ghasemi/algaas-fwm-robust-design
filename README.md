@@ -106,11 +106,19 @@ The fundamental mode exhibits strong numerical stability under the tested refine
 
 ![Mesh convergence analysis](figures/mesh_convergence.png)
 
-### 4. Modal Identity Tracking
+### 4. Fundamental-Mode Continuity Analysis
 
-Mode continuity was examined over the wavelength range of 1500–1600 nm using normalized squared electric-field overlap and an assignment algorithm.
+The continuity of the first mode returned by the eigenmode solver was examined over the wavelength range of 1500–1600 nm using normalized squared electric-field overlap between consecutive wavelength points.
 
-The minimum matched overlap was approximately 0.999963, indicating strong continuity of the calculated modal field profiles across the sampled wavelength range.
+The overlap calculation combines all three electric-field components (\(E_x\), \(E_y\), and \(E_z\)) and uses the same spatial grid at all sampled wavelengths.
+
+For the 21 sampled wavelengths, 20 consecutive-wavelength comparisons were performed. The normalized squared-overlap values range from approximately 0.9999928519 to 0.9999933465.
+
+These results demonstrate strong numerical continuity of the calculated fundamental-mode electric-field distribution across the investigated wavelength range.
+
+The complete numerical results are stored in `modal_continuity.csv` and can be reproduced using `simulations/generate_dispersion_data.py`.
+
+This analysis evaluates the continuity of the solver's first returned mode; it does not implement automatic mode matching across all calculated modes or a linear-assignment tracking algorithm.
 
 ### 5. Geometrical Sensitivity
 

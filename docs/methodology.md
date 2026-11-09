@@ -174,33 +174,35 @@ The calculated effective-index and group-velocity-dispersion curves are presente
 
 **Figure 3.** Effective refractive index and calculated group-velocity dispersion as functions of wavelength.
 
-### 7.1 Modal Identity Tracking
+### 7.1 Fundamental-Mode Continuity Analysis
 
-To assess the continuity of the calculated modes across the wavelength range, an electric-field overlap analysis is performed between consecutive wavelength points.
+To assess the continuity of the fundamental-mode electric-field distribution across the wavelength range, a normalized squared-overlap analysis is performed between consecutive wavelength points.
 
-For each pair of adjacent wavelengths, the normalized squared overlap between the electric-field distributions is calculated:
+For two electric-field distributions, the normalized squared overlap is defined as:
 
 \[
-O_{ij} =
+O =
 \frac{
-|\langle E_i(\lambda_k), E_j(\lambda_{k+1}) \rangle|^2
+\left|\langle E_a,E_b\rangle\right|^2
 }{
-\langle E_i(\lambda_k), E_i(\lambda_k) \rangle
-\langle E_j(\lambda_{k+1}), E_j(\lambda_{k+1}) \rangle
+\langle E_a,E_a\rangle
+\langle E_b,E_b\rangle
 }
 \]
 
-The overlap calculation combines the three electric-field components \(E_x\), \(E_y\), and \(E_z\). The mode correspondence between successive wavelength points is determined by maximizing the total overlap using the linear assignment algorithm.
+The overlap calculation combines the three electric-field components \(E_x\), \(E_y\), and \(E_z\). The discrete inner product is evaluated as a sum over the transverse grid points and all three field components. Complex conjugation is applied to the first field in the inner product.
 
-The discrete inner product is evaluated as a sum over all transverse grid points and the three electric-field components, using the same spatial grid at both wavelengths.
+The calculations use the same spatial grid at all sampled wavelengths. The overlap is evaluated between the first mode returned by the eigenmode solver at each pair of consecutive wavelength points.
 
-For the wavelength sweep from 1500 nm to 1600 nm, with a 5 nm increment, the calculated mode correspondence remains unchanged across all consecutive wavelength pairs.
+For the wavelength sweep from 1500 nm to 1600 nm, with a 5 nm increment, 20 consecutive-wavelength comparisons are performed.
 
-The minimum matched overlap obtained in this analysis is approximately 0.999963.
+The normalized squared-overlap values range from approximately 0.99999285 to 0.99999335. These results indicate strong continuity of the calculated fundamental-mode electric-field distribution over the sampled wavelength range.
 
-These results indicate strong continuity of the calculated electric-field profiles across the sampled wavelength range. They support the use of the fundamental-mode effective-index data for the current dispersion analysis.
+The effective-index data used in the dispersion analysis are therefore supported by this fundamental-mode continuity check.
 
-This overlap analysis is a numerical mode-tracking check. It does not independently establish the physical accuracy of the waveguide model or replace validation against experimental or reference data.
+The results are stored in `modal_continuity.csv` and can be reproduced using `simulations/generate_dispersion_data.py`.
+
+This analysis checks the continuity of the solver's first returned mode. It does not implement automatic mode matching across all calculated modes or a linear-assignment tracking algorithm. It also does not independently establish the physical accuracy of the waveguide model.
 
 ## 8. Geometrical Sensitivity Analysis
 
