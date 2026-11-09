@@ -2,83 +2,174 @@
 
 ## 1. Introduction
 
-Four-wave mixing (FWM) is a third-order nonlinear optical process in which interacting optical fields generate new frequency components through the third-order nonlinear susceptibility of a material.
+This project presents a preliminary numerical investigation of waveguide modes, dispersion, and degenerate four-wave mixing (FWM) in an AlGaAs-on-insulator waveguide.
 
-This project investigates degenerate four-wave mixing in AlGaAs-on-insulator (AlGaAsOI) integrated waveguides, with particular emphasis on dispersion engineering and fabrication-induced geometrical variations.
+The main objective is to examine the linear phase mismatch of FWM and investigate how spatial discretization and geometrical variations influence the calculated results.
 
-## 2. Degenerate Four-Wave Mixing
+The current implementation combines a finite-difference eigenmode calculation with wavelength-dependent material models and numerical post-processing.
 
-In degenerate four-wave mixing, two pump photons interact with a signal field to generate an idler field.
+## 2. Waveguide Structure and Material Model
 
-The energy conservation condition is:
+The computational structure consists of:
 
-$$
-2\omega_p = \omega_s + \omega_i
-$$
+- An aluminium gallium arsenide (AlGaAs) rectangular waveguide core.
+- A silica substrate.
+- Air in the upper and lateral cladding regions.
 
-where:
+The nominal waveguide parameters are:
 
-- $\omega_p$: Pump angular frequency
-- $\omega_s$: Signal angular frequency
-- $\omega_i$: Idler angular frequency
+| Parameter | Value |
+|---|---:|
+| Operating wavelength | 1.55 µm |
+| Core width | 0.75 µm |
+| Core thickness | 0.35 µm |
+| Aluminium fraction | 0.21 |
+| Nominal grid spacing | 0.00625 µm |
+| Computational window | 4 × 4 µm |
+| Number of calculated modes | 4 |
 
-## 3. Phase-Matching Condition
+The AlGaAs refractive index is calculated using an Adachi-type wavelength-dependent dispersion expression implemented in `src/materials.py`.
 
-Efficient four-wave mixing requires an appropriate phase relationship between the interacting optical waves.
+The silica refractive index is calculated using a Sellmeier model. Air is represented by a refractive index of 1.
 
-The linear phase mismatch is defined as:
+The present structure is a simplified numerical representation. It does not include a complete fabrication stack, measured material dispersion, or experimentally determined waveguide parameters.
 
-$$
-\Delta\beta_{\mathrm{lin}} = 2\beta_p-\beta_s-\beta_i
-$$
+## 3. Eigenmode Analysis
 
-where $\beta_p$, $\beta_s$, and $\beta_i$ are the propagation constants of the pump, signal, and idler waves, respectively.
+The transverse electromagnetic eigenmodes are calculated using a finite-difference eigenmode solver.
 
-The total phase mismatch may also include nonlinear contributions associated with the optical intensities and nonlinear refractive index.
+The computational domain is discretized on a uniform spatial grid. The relative permittivity distribution is constructed from the refractive-index profiles of the AlGaAs core, silica substrate, and air cladding.
+
+The propagation constant is obtained from:
+
+\[
+\beta(\omega)=\frac{\omega}{c}n_{\mathrm{eff}}(\omega)
+\]
+
+where \(n_{\mathrm{eff}}\) is the effective refractive index and \(c\) is the speed of light in vacuum.
+
+The solver calculates the effective indices and electric-field distributions of the requested modes.
+
+The current implementation evaluates four modes at the nominal geometry. Subsequent wavelength-dependent calculations use the fundamental mode.
 
 ## 4. Waveguide Dispersion
 
-The propagation constant depends on angular frequency and waveguide geometry:
+The wavelength dependence of the propagation constant is used to estimate the group-velocity dispersion parameter:
 
-$$
-\beta = \beta(\omega,W,H)
-$$
+\[
+\beta_2=\frac{\partial^2\beta}{\partial\omega^2}
+\]
+
+The propagation constant is calculated from the wavelength-dependent effective index.
+
+A polynomial fit to the calculated propagation-constant data is used to estimate its second derivative with respect to angular frequency.
+
+Polynomial degrees and endpoint sensitivity are compared to assess numerical fitting stability.
+
+These checks evaluate the consistency of the numerical fitting procedure; they do not independently validate the physical accuracy of the material model or waveguide structure.
+
+## 5. Degenerate Four-Wave Mixing
+
+Degenerate four-wave mixing is a third-order nonlinear optical process in which two pump photons interact to generate signal and idler frequency components.
+
+The energy conservation condition is:
+
+\[
+2\omega_p=\omega_s+\omega_i
+\]
 
 where:
 
-- $W$: Waveguide width
-- $H$: Waveguide core thickness
+- \(\omega_p\) is the pump angular frequency.
+- \(\omega_s\) is the signal angular frequency.
+- \(\omega_i\) is the idler angular frequency.
 
-Changes in waveguide geometry can modify modal confinement and dispersion, thereby influencing the phase-matching conditions.
+The corresponding linear phase mismatch is defined as:
 
-## 5. Nonlinear Optical Effects
+\[
+\Delta\beta_{\mathrm{lin}}
+=2\beta_p-\beta_s-\beta_i
+\]
 
-The nonlinear response of AlGaAs contributes to four-wave mixing through its third-order optical susceptibility.
+where the propagation constants are evaluated at the pump, signal, and idler frequencies using the calculated fundamental-mode dispersion.
 
-Nonlinear absorption mechanisms, including two-photon absorption and free-carrier absorption, may also influence the effective conversion performance.
+The current FWM analysis uses:
 
-These mechanisms will be incorporated into the numerical model after the relevant material parameters and governing equations have been established.
+- Pump wavelength: 1550 nm.
+- Signal wavelengths: sampled from the available dispersion data.
+- Idler frequency: determined from energy conservation.
+- Fundamental guided mode for all three frequency components.
+- Only signal–idler pairs within the sampled wavelength range are considered.
 
-## 6. Fabrication-Induced Variations
+The specific signal and idler wavelengths of approximately 1542.027 nm and 1558.056 nm are used in the geometrical sensitivity analysis.
 
-Fabrication variations in waveguide width and thickness can modify the effective refractive index and propagation constants.
+The current implementation evaluates the linear phase mismatch. It does not calculate nonlinear phase shifts, nonlinear conversion efficiency, or output power.
 
-The resulting changes in phase mismatch may affect conversion efficiency and operational bandwidth.
+## 6. Geometrical Sensitivity
 
-The sensitivity of four-wave mixing performance to these geometrical variations is a central research objective of this project.
+The influence of geometrical variations is investigated by changing the waveguide core width and thickness around their nominal values.
 
-## 7. Modeling Scope
+Two types of sensitivity analysis are implemented:
 
-The initial model will consider:
+1. Effective-index sensitivity for the calculated guided modes.
+2. Linear FWM phase-mismatch sensitivity for the fundamental mode.
 
-- Degenerate four-wave mixing
-- Fundamental transverse-electric (TE) mode
-- Waveguide dispersion
-- Phase-matching conditions
-- Geometrical fabrication variations
+The FWM geometrical analysis considers independent changes in width and thickness around the nominal geometry.
 
-Nonlinear propagation and absorption effects will be introduced in subsequent modeling stages.
+These calculations provide a preliminary numerical comparison of the response to the tested geometrical variations. They do not establish fabrication tolerances or identify a globally optimized geometry.
 
-## 8. Scientific Limitations
+## 7. Numerical Discretization and Mesh Sensitivity
 
-The physical model is under development. Quantitative predictions will only be reported after material parameters, modal properties, and numerical methods have been verified against reliable scientific sources.
+The waveguide cross-section is represented on a uniform spatial grid.
+
+The nominal grid spacing is 0.00625 µm. Additional grid resolutions are used in the effective-index convergence and FWM mesh-sensitivity analyses.
+
+The FWM mesh-sensitivity analysis compares grid spacings of 0.0125 µm and 0.00625 µm for three geometrical configurations.
+
+Since the core boundary is represented on a discrete grid, changes in nominal geometry may also change its rasterized representation.
+
+Consequently, the calculated geometrical sensitivity may include discretization effects. More extensive mesh refinement and boundary-treatment studies are required for stronger quantitative conclusions.
+
+## 8. Scope of the Current Nonlinear Model
+
+Although the project investigates FWM, the implemented calculations currently focus on the linear phase mismatch.
+
+The following effects are not yet included in the numerical FWM calculation:
+
+- Nonlinear phase shifts.
+- Nonlinear coefficient and effective nonlinear mode area.
+- Pump-power-dependent phase matching.
+- Two-photon absorption.
+- Free-carrier absorption and carrier dynamics.
+- Nonlinear propagation and conversion efficiency.
+
+A complete nonlinear FWM model would require additional material parameters, nonlinear mode calculations, and propagation equations.
+
+These effects are therefore treated as future extensions rather than completed results.
+
+## 9. Scientific Limitations
+
+The current study has several limitations:
+
+1. The waveguide geometry and material stack are simplified.
+2. The material models have not been independently validated against measurements for the specific structure.
+3. The numerical mesh studies do not establish complete convergence for every calculated mode or FWM quantity.
+4. The geometrical sensitivity study covers a limited range of parameter variations.
+5. The FWM analysis evaluates linear phase mismatch rather than nonlinear conversion efficiency.
+6. No experimental measurements or independent reference-device results are used for validation.
+
+The reported results should therefore be interpreted as preliminary numerical findings within the assumptions and parameter ranges of the implemented model.
+
+## 10. Future Development
+
+Further work may include:
+
+- More extensive mesh-refinement and boundary-discretization studies.
+- Validation of material dispersion against reliable experimental or published data.
+- Broader geometrical parameter sweeps.
+- Evaluation of nonlinear mode properties and effective nonlinear coefficients.
+- Inclusion of nonlinear phase mismatch and pump-power dependence.
+- Modeling of nonlinear propagation and absorption.
+- Comparison with published or experimentally measured AlGaAs waveguide results.
+
+These extensions would provide a stronger basis for evaluating phase matching and fabrication-tolerant FWM performance.

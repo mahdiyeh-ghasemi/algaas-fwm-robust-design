@@ -3,3 +3,4 @@ scipy>=1.13
 matplotlib>=3.9
 pandas>=2.2
 modesolver @ git+https://github.com/thomas-e-murphy/modesolver.git@v3.0.2
+Pillow>=10.0

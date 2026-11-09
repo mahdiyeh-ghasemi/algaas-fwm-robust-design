@@ -126,7 +126,7 @@ The linear FWM phase mismatch is evaluated using:
 
 where the pump, signal, and idler propagation constants are calculated from the fundamental-mode effective indices.
 
-The pump wavelength is fixed at 1550 nm, and the signal frequency is detuned by 1 THz from the pump. The idler frequency is determined through energy conservation.
+The pump wavelength is fixed at 1550 nm. Signal wavelengths are sampled from the available dispersion data, and the idler frequency is determined through energy conservation, ωᵢ = 2ωₚ − ωₛ. Only signal–idler pairs for which the idler wavelength lies within the sampled wavelength range are considered.
 
 The current analysis examines linear phase mismatch and does not include the nonlinear contribution associated with pump power and the nonlinear coefficient.
 
@@ -134,9 +134,11 @@ The current analysis examines linear phase mismatch and does not include the non
 
 ### 7. Mesh Sensitivity of FWM Phase Mismatch
 
-The phase mismatch was recalculated using two grid spacings for three geometrical configurations.
+The linear FWM phase mismatch was recalculated using two spatial grid spacings for three geometrical configurations.
 
-| Geometry | 0.0125 µm grid (m⁻¹) | 0.00625 µm grid (m⁻¹) |
+The table reports the absolute value of the signed linear phase mismatch, \(|\Delta\beta|\). The signed values are retained in the corresponding CSV dataset.
+
+| Geometry | \(|\Delta\beta|\), 0.0125 µm grid (m⁻¹) | \(|\Delta\beta|\), 0.00625 µm grid (m⁻¹) |
 |---|---:|---:|
 | Nominal | 45.9051 | 45.1689 |
 | Reduced width | 43.6062 | 44.0130 |
@@ -167,6 +169,7 @@ These results are preliminary and do not establish an optimized phase-matched de
 ## Repository Structure
 
 ```text
+algaas-fwm-robust-design/
 ├── docs/
 │   ├── literature_review.md
 │   ├── methodology.md
@@ -175,13 +178,114 @@ These results are preliminary and do not establish an optimized phase-matched de
 ├── simulations/
 ├── src/
 ├── dispersion_data.csv
-├── fwm_phase_matching.csv
-├── fwm_mesh_sensitivity.csv
 ├── fwm_geometry_sensitivity.csv
+├── fwm_mesh_sensitivity.csv
+├── fwm_phase_matching.csv
 ├── geometrical_tolerance.csv
+├── mesh_convergence.csv
 ├── sensitivity_coefficients.csv
+├── requirements.txt
+├── LICENSE
+├── .gitignore
 └── README.md
 ```
+
+## Installation and Reproducibility
+
+### Requirements
+
+- Python 3.14.2 (used in the current development environment)
+- NumPy
+- SciPy
+- Matplotlib
+- Pandas
+- Pillow
+- `modesolver` (v3.0.2)
+
+Dependencies are listed in `requirements.txt`. Compatibility with other Python versions has not been independently tested.
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/mahdiyeh-ghasemi/algaas-fwm-robust-design.git
+cd algaas-fwm-robust-design
+```
+
+Create and activate a virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+On Windows PowerShell, use:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Install the dependencies:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### Inspect Existing Results
+
+Previously generated numerical datasets and figures are included in the repository. They can be inspected without rerunning the simulations.
+
+Important datasets include:
+
+- `dispersion_data.csv`
+- `fwm_phase_matching.csv`
+- `fwm_mesh_sensitivity.csv`
+- `fwm_geometry_sensitivity.csv`
+
+Figures are stored in the `figures/` directory.
+
+### Reproduce the FWM Analysis
+
+Run the following commands from the repository root.
+
+**1. Generate dispersion data**
+
+```bash
+PYTHONPATH=. python simulations/generate_dispersion_data.py
+```
+
+This script calculates the fundamental guided mode at 21 wavelengths between 1.50 and 1.60 µm and generates `dispersion_data.csv`. This step involves repeated eigenmode calculations and may take some time.
+
+**2. Calculate linear phase mismatch**
+
+```bash
+PYTHONPATH=. python simulations/fwm_phase_matching.py
+```
+
+This script reads `dispersion_data.csv`, calculates signal and idler wavelengths under energy conservation, and generates `fwm_phase_matching.csv`.
+
+**3. Generate the FWM phase-mismatch figure**
+
+```bash
+PYTHONPATH=. python simulations/plot_fwm_phase_matching.py
+```
+
+The figure is saved as `figures/fwm_phase_matching.png`.
+
+### Additional Analyses
+
+Other scripts in `simulations/` cover eigenmode visualization, dispersion, mesh convergence, geometrical tolerance, modal sensitivity, and FWM sensitivity.
+
+For plotting scripts, the corresponding numerical CSV dataset must be available. If it is not already included, run the relevant analysis script first.
+
+### Reproducibility Notes
+
+- Run scripts from the repository root.
+- The `PYTHONPATH=.` prefix makes project modules importable.
+- Numerical results may vary slightly with software versions and numerical solver implementations.
+- Some simulations are computationally intensive.
 
 ## Computational Tools
 
