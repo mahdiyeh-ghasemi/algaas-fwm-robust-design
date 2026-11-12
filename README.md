@@ -1,4 +1,5 @@
 # Numerical Analysis of Dispersion, Linear Phase Mismatch, and Geometric Sensitivity in AlGaAs-on-Insulator Waveguides for Four-Wave Mixing
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24089553.svg)](https://doi.org/10.5281/zenodo.24089553)
 
 ## Project Overview
 
